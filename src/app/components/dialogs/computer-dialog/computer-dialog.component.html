@@ -1,0 +1,49 @@
+<div class="container">
+  <h3 mat-dialog-title *ngIf="flag == 1">Add new computer</h3>
+  <h3 mat-dialog-title *ngIf="flag == 2">Modify computer: {{data.computerid}}</h3>
+  <h3 mat-dialog-title *ngIf="flag == 3">Delete computer: {{data.computerid}}</h3>
+
+  <form class="mat-dialog-content"  #formControl="ngForm">
+
+    <div class="form">
+      <mat-form-field class="example-full-width">
+        <input type="tel" matInput placeholder="serialnumber" [(ngModel)]="data.serialnumber" name="serialnumber" [disabled]="flag == 3" required>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field class="example-full-width">
+        <input type="tel" matInput placeholder="manufacturername" [(ngModel)]="data.manufacturername" name="manufacturername" [disabled]="flag == 3">
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field class="example-full-width">
+        <input type="tel" matInput placeholder="modelname" [(ngModel)]="data.modelname" name="modelname" [disabled]="flag == 3">
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field class="example-full-width">
+        <input type="tel" matInput placeholder="typeofpc" [(ngModel)]="data.typeofpc" name="typeofpc" [disabled]="flag == 3">
+      </mat-form-field>
+    </div>
+
+<!--  <div class="form">
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.customer" placeholder="Customer" name="customer" [compareWith]="compareTo" [disabled]="flag == 3" >
+          <mat-option *ngFor="let customer of customers" [value]="customer">
+            {{ customer.customername }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field >
+    </div>-->
+
+    <div mat-dialog-actions>
+      <button mat-button *ngIf="flag == 1"  [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="add()">Save</button>
+      <button mat-button *ngIf="flag == 2"  [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="update()">Save</button>
+      <button mat-button *ngIf="flag == 3"  [mat-dialog-close]="1" (click)="delete()">Delete</button>
+      <button mat-button (click)="cancel()" tabindex="-1" >Cancel</button>
+    </div>
+  </form>
+ </div>

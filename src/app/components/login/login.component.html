@@ -1,0 +1,20 @@
+<form class="centered" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div>
+        <p>
+        <mat-form-field>
+            <input type="text" matInput placeholder="Username" formControlName="username" required>
+        </mat-form-field>
+        </p>
+        <p>
+        <mat-form-field>
+            <input type="password" matInput placeholder="Password" formControlName="password" required>
+        </mat-form-field>
+        </p>
+    </div>
+
+
+  <div class="button">
+    <button class="btn-submit" type="submit" [disabled]="!loginForm.valid">Sign in</button>
+  </div>
+
+</form>

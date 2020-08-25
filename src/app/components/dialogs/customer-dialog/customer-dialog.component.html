@@ -1,0 +1,51 @@
+<div class="container">
+  <h3 mat-dialog-title *ngIf="flag == 1">Add new customer</h3>
+  <h3 mat-dialog-title *ngIf="flag == 2">Modify customer: {{data.customername}}</h3>
+  <h3 mat-dialog-title *ngIf="flag == 3">Delete customer: {{data.customername}}</h3>
+
+  <form class="mat-dialog-content" #formControl="ngForm">
+
+    <div class="form">
+      <mat-form-field>
+        <input matInput placeholder="Name" [(ngModel)]="data.customername" name="customername" [disabled]="flag == 3" required>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <input matInput placeholder="Surname" [(ngModel)]="data.customersurname" name="customersurname" [disabled]="flag == 3">
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <input matInput placeholder="Phone" [(ngModel)]="data.customerphone" name="customerphone" [disabled]="flag == 3" required>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <input matInput placeholder="Address" [(ngModel)]="data.customeradress" name="customeradress" [disabled]="flag == 3" required>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <input matInput placeholder="Username" [(ngModel)]="data.customerusername" name="customerusername" [disabled]="flag == 3" required>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <input matInput placeholder="Password" [(ngModel)]="data.customerpassword" name="customerpassword" [disabled]="flag == 3" required>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button *ngIf="flag == 1" [type]="submit" [mat-dialog-close]="1" (click)="add()" [disabled]="!formControl.valid">Save</button>
+      <button mat-button *ngIf="flag == 2" [type]="submit" [mat-dialog-close]="1" (click)="update()" [disabled]="!formControl.valid">Save</button>
+      <button mat-button *ngIf="flag == 3" [type]="submit" [mat-dialog-close]="1" (click)="delete()">Delete</button>
+      <button mat-button (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>

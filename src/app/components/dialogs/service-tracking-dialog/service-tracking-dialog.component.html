@@ -1,0 +1,76 @@
+
+<div class="container">
+  <h3 mat-dialog-title *ngIf="flag == 1">Add new service tracking</h3>
+  <h3 mat-dialog-title *ngIf="flag == 2">Modify service tracking: {{data.confirmationid}}</h3>
+  <h3 mat-dialog-title *ngIf="flag == 3">Delete service tracking: {{data.confirmationid}}</h3>
+
+  <form class="mat-dialog-content"  #formControl="ngForm">
+    <div class="form">
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.employee" placeholder="Employee" name="employee" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let employee of employees" [value]="employee">
+            {{ employee.employeename }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.customer" placeholder="Customer" name="customer" [compareWith]="compareTo2" [disabled]="flag == 3">
+          <mat-option *ngFor="let customer of customers" [value]="customer">
+            {{ customer.customername }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.computer" placeholder="Computer" name="computer" [compareWith]="compareTo3" [disabled]="flag == 3">
+          <mat-option *ngFor="let computer of computers" [value]="computer">
+            {{ computer.serialnumber }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <input matInput [matDatepicker]="appointmentdate" placeholder="Appointment date" [(ngModel)]="data.appointmentdate" name="appointmentdate" [disabled]="flag == 3">
+        <mat-datepicker-toggle matSuffix [for]="appointmentdate"></mat-datepicker-toggle>
+        <mat-datepicker #appointmentdate></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <label>
+          <input type="checkbox" name="computerreceived"  [(ngModel)]="data.computerreceived">
+          Received
+      </label>
+  </div>
+
+    <div>
+      <label>
+          <input type="checkbox" name="computerisserviced"  [(ngModel)]="data.computerisserviced">
+          Serviced
+      </label>
+  </div>
+
+    <div class="form">
+      <mat-form-field>
+        <input matInput [matDatepicker]="takingbackdate" placeholder="taking back date" [(ngModel)]="data.takingbackdate" name="takingbackdate" [disabled]="flag == 3">
+        <mat-datepicker-toggle matSuffix [for]="takingbackdate"></mat-datepicker-toggle>
+        <mat-datepicker #takingbackdate></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+
+    <div mat-dialog-actions>
+      <button mat-button *ngIf="flag == 1"  [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="add()">Save</button>
+      <button mat-button *ngIf="flag == 2"  [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="update()">Save</button>
+      <button mat-button *ngIf="flag == 3"  [mat-dialog-close]="1" (click)="delete()">Delete</button>
+      <button mat-button (click)="cancel()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+ </div>

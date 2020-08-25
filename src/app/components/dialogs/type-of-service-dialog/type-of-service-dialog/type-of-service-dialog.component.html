@@ -1,0 +1,25 @@
+<div class="container">
+  <h3 mat-dialog-title *ngIf="flag == 1">Add type of service</h3>
+  <h3 mat-dialog-title *ngIf="flag == 2">Modify type of service: {{data.typeofservicename}}</h3>
+  <h3 mat-dialog-title *ngIf="flag == 3">Delete type of service: {{data.typeofservicename}}</h3>
+  <form class="mat-dialog-content" #formControl="ngForm">
+    <div class="form">
+      <mat-form-field>
+        <input matInput placeholder="Name" [(ngModel)]="data.typeofservicename" name="typeofservicename" [disabled]="flag == 3" required>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <input matInput placeholder="Price" [(ngModel)]="data.typeofserviceprice" name="typeofserviceprice" [disabled]="flag == 3">
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button *ngIf="flag == 1" [type]="submit" [mat-dialog-close]="1" (click)="add()" [disabled]="!formControl.valid">Save</button>
+      <button mat-button *ngIf="flag == 2" [type]="submit" [mat-dialog-close]="1" (click)="update()" [disabled]="!formControl.valid">Save</button>
+      <button mat-button *ngIf="flag == 3" [type]="submit" [mat-dialog-close]="1" (click)="delete()">Delete</button>
+      <button mat-button (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>

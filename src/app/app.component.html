@@ -1,0 +1,49 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav opened mode="side">
+    <mat-accordion>
+      <a mat-button style="text-align: center">
+        <mat-icon [routerLink]="['home']">home</mat-icon>
+      </a>
+      <mat-expansion-panel class="mat-panel">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            PC SERVICE
+          </mat-panel-title>
+          <mat-panel-description>
+            Menu
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <div *ngIf="isLoggedIn">
+
+            <div *ngIf="getLoggedInRole()==='EMPLOYEE'">
+              <a mat-button [routerLink]="['all-computers']">Computers</a>
+              <a mat-button [routerLink]="['customer']">Customer</a>
+              <a mat-button [routerLink]="['employee']">Employee</a>
+              <a mat-button [routerLink]="['type-of-service']">Type of service</a>
+              <a mat-button [routerLink]="['pc-service']">Pc Service</a>
+            </div>
+
+            <a mat-button [routerLink]="['service-tracking']">Service tracking</a>
+            <a mat-button [routerLink]="['guarantee-bill']">Guarantee bill</a>
+            <a mat-button (click)="logout()">Logout</a>
+          </div>
+
+          <div *ngIf="!isLoggedIn">
+            <a mat-button [routerLink]="['registration']">Register</a>
+            <a mat-button [routerLink]="['login']">Login</a>
+          </div>
+
+        </mat-nav-list>
+        <mat-nav-list>
+
+        </mat-nav-list>
+
+      </mat-expansion-panel>
+
+
+    </mat-accordion>
+  </mat-sidenav>
+  <router-outlet></router-outlet>
+</mat-sidenav-container>
+

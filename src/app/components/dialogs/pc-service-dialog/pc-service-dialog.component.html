@@ -1,0 +1,54 @@
+<div class="container">
+  <h3 mat-dialog-title *ngIf="flag == 1">Add pc service</h3>
+  <h3 mat-dialog-title *ngIf="flag == 2">Modify pc service: {{data.serviceid}}</h3>
+  <h3 mat-dialog-title *ngIf="flag == 3">Delete pc service: {{data.serviceid}}</h3>
+
+  <form class="mat-dialog-content"  #formControl="ngForm">
+
+    <div class="form">
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.computer" placeholder="computer" name="computer" [compareWith]="compareTo" [disabled]="flag == 3" required>
+          <mat-option *ngFor="let computer of computers" [value]="computer" aria-required="true">
+            {{ computer.serialnumber }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.typeofservice" placeholder="typeofservice" name="typeofservice" [compareWith]="compareTo2" [disabled]="flag == 3" required>
+          <mat-option *ngFor="let typeofservice of typeofservices" [value]="typeofservice" aria-required="true">
+            {{ typeofservice.typeofservicename }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.employee" placeholder="employee" name="employee" [compareWith]="compareTo3" [disabled]="flag == 3" required>
+          <mat-option *ngFor="let employee of employees" [value]="employee" aria-required="true">
+            {{ employee.employeename }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <label>
+          <input type="checkbox" name="isfinishedservice"  [(ngModel)]="data.isfinishedservice">
+          Finished
+      </label>
+  </div>
+
+
+
+    <div mat-dialog-actions>
+      <button mat-button *ngIf="flag == 1" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="add()">Save</button>
+      <button mat-button *ngIf="flag == 2" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="update()">Save</button>
+      <button mat-button *ngIf="flag == 3" [mat-dialog-close]="1" (click)="delete()">Obriši</button>
+      <button mat-button (click)="cancel()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+  </div>

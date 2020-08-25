@@ -1,0 +1,8 @@
+.centered{
+    width: 50%;
+    margin:auto;
+    margin-top: 5%;
+    text-align: center;
+    border-radius: 10pt;
+    background-color: rgba(33, 23, 70, 0.932);
+  }

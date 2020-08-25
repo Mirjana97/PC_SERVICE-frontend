@@ -1,0 +1,75 @@
+<mat-toolbar color="primary">
+  <span class="title-center">Service tracking</span>
+ </mat-toolbar>
+
+ <div class="container mat-elevation-z8">
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+  <mat-table #table [dataSource]="dataSource" class="mat-cell" matSort>
+    <ng-container matColumnDef="confirmationid">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Confirmation ID</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.confirmationid}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="employee">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Employee</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.employee.employeename}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="customer">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Customer</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.customer.customername}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="computer">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Computer</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.computer.serialnumber}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="appointmentdate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Appointment date</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.appointmentdate | date : "dd.MM.yyyy."}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="computerreceived">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Received</mat-header-cell>
+      <mat-cell *matCellDef="let row"  [style.color]="row.computerreceived == true ? 'green':'red' "> {{row.computerreceived?'Yes':'No'}}</mat-cell>
+    </ng-container>
+
+   <ng-container matColumnDef="computerisserviced">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Serviced</mat-header-cell>
+      <mat-cell *matCellDef="let row"  [style.color]="row.computerisserviced == true ? 'green':'red' "> {{row.computerisserviced?'Yes':'No'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="takingbackdate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Taking back date</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.takingbackdate | date : "dd.MM.yyyy."}}</mat-cell>
+    </ng-container>
+    <!-- actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <button *ngIf="getLoggedInRole()==='EMPLOYEE'" mat-icon-button color="primary" (click)="openDialog(1)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button *ngIf="getLoggedInRole()==='EMPLOYEE'" mat-icon-button color="primary" (click)="openDialog(2, row.confirmationid, row.employee, row.customer, row.computer, row.appointmentdate, row.computerreceived, row.computerisserviced, row.takingbackdate)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+
+        <button *ngIf="getLoggedInRole()==='EMPLOYEE'" mat-icon-button color="primary" (click)="openDialog(3, row.confirmationid, row.employee, row.customer, row.computer, row.appointmentdate, row.computerreceived, row.computerisserviced, row.takingbackdate)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row style="cursor: default" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+ </div>

@@ -1,0 +1,74 @@
+<mat-toolbar color="primary">
+  <span class="title-center">Employee</span>
+ </mat-toolbar>
+
+ <div class="container mat-elevation-z8">
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+       </mat-form-field>
+     <mat-table [dataSource]="dataSource" class="mat-cell" matSort>
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+    <!-- ID Column -->
+    <ng-container matColumnDef="employeeid">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+      <mat-cell *matCellDef="let row" >{{row.employeeid}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="employeename">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.employeename}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="employeesurname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Surname</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.employeesurname}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="employeephone">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Phone</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.employeephone}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="employeeadress">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Address</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.employeeadress}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="employeeusername">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Username</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.employeeusername}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="employeepassword">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Password</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.employeepassword}}</mat-cell>
+    </ng-container>
+
+    <!-- actions -->
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="primary" (click)="openDialog(1)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="primary" (click)="openDialog(2, row.employeeid, row.employeename, row.employeesurname, row.employeephone, row.employeeadress, row.employeeusername, row.employeepassword)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="openDialog(3, row.employeeid, row.employeename, row.employeesurname, row.employeephone, row.employeeadress, row.employeeusername, row.employeepassword)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row style="cursor: default" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+  </div>
